@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EVAL-AUDIO-CAPTIONERS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="helper.js" defer></script>
+    <style>
+        td {
+            vertical-align: middle;
+        }
+
+        audio {
+            width: 20vw;
+            min-width: 100px;
+            max-width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+        <div class="text-center">
+            <h1>Evaluation on Audio Captioners for V2A Tasks</h1>
+            <p>
+            </p>
+            <p><b>Jaden @ VR</b></p>
+        </div>
+    </div>
+
+    <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+        <h3>Checkpoints and Prompts:</h3>
+        <p>
+            <ul>
+                <li>Audio-Flamingo_Foundation
+                    <ul>
+                        <li>Checkpoints: foundation</li>
+                        <li>Prompts: Describe the sound in a sentence.</li>
+                    </ul>   
+                </li>
+                <li>Audio-Flamingo_Chat
+                    <ul>
+                        <li>Checkpoints: chat</li>
+                        <li>Prompts: Can you briefly describe what you hear in this audio?</li>
+                    </ul>   
+                </li>
+                <li>Qwen2-Audio
+                    <ul>
+                        <li>Checkpoints: Qwen2-Audio-7B-Instruct</li>
+                        <li>Prompts: Please describe the audio.</li>
+                    </ul>   
+                </li>
+                <li>Salmonn
+                    <ul>
+                        <li>Checkpoints: SALMONN-13B v1</li>
+                        <li>Prompts: Please describe the audio.</li>
+                    </ul>   
+                </li>
+            </ul>
+        </p>
+    </div>
+
+    <div class="container shadow p-5 mb-5 bg-white rounded">
+        <h3>Results:</h3>
+        <div class="container pt-3 table-responsive">
+            <table class="table table-hover" id="audio-captioner-table" style="table-layout: fixed; width: 100%;">
+                <thead>
+                    <tr>
+                        <th class="col-width" style="text-align: center;">Audio</th>
+                        <th class="col-width" style="text-align: center;">Gemini-flash-2.5</th>
+                        <th class="col-width" style="text-align: center;">Audio-Flamingo_Foundation</th>
+                        <th class="col-width" style="text-align: center;">Audio-Flamingo_Foundation</th>
+                        <th class="col-width" style="text-align: center;">Audio-Flamingo_Chat</th>
+                        <th class="col-width" style="text-align: center;">Qwen2-Audio</th>
+                        <th class="col-width" style="text-align: center;">Salmonn</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/01.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>This audio features a solo electric guitar playing a bluesy melody. The guitar has a clean, slightly overdriven tone, and the player uses a lot of vibrato and bends. The music is present throughout the entire audio clip.</td>
+                        <td>an electric guitar is playing a musical.</td>
+                        <td>The audio primarily features music produced by vibrating instruments, with some background noise.</td>
+                        <td>The audio contains someone playing a fast piece of music on an acoustic guitar with a lot of bending and vibrato, which sounds complex and emotional.</td>
+                        <td>This is an instrumental music piece. There is an electric guitar playing a melody. The guitarist is playing a solo. The guitarist is playing a slow melody with a lot of vibrato. The atmosphere is relaxed. This piece could be used in the soundtrack of a romantic movie. It could also be used in the soundtrack of a video game where the player is exploring a beautiful scenery.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/02.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with the distinct sound of a bird chirping, followed by the gentle rustling of leaves, suggesting a natural outdoor environment. At the 0:03 mark, a high-pitched, sustained tone emerges, reminiscent of a tuning fork or a high-frequency electronic hum. This sound continues until 0:06, when it abruptly stops, leaving only the ambient sounds of nature.</td>
+                        <td>small birds singing with a distant city buzz</td>
+                        <td>The audio primarily consists of background noise and bird vocalizations, including the sound of a bird flying. There's also the sound of a woman speaking briefly.</td>
+                        <td>The audio contains sounds of birds chirping and tweeting, as well as some light rustling. There's also an instance of a generic impact sound that could be interpreted as a door closing.</td>
+                        <td>Birds are chirping outside.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/03.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio features the distinct, high-pitched whine of a **turbocharger spooling up**, followed by the **roar of an engine accelerating**. This suggests a powerful vehicle, possibly a race car or a modified street car, rapidly increasing its speed. The sound is consistent throughout the entire audio clip, indicating continuous acceleration.</td>
+                        <td>a motor revs and is accelerating and then decreases.</td>
+                        <td>The audio features the sound of a medium engine running continuously, with intermittent generic impact sounds occurring at various intervals.</td>
+                        <td>The audio contains sounds of an engine accelerating, revving or making a vroom sound at intervals (0.00-0.53), (2.48-7.98), and (8.86-10.00).</td>
+                        <td>The engine of a vehicle is revved up and accelerates rapidly.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/04.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The distinct sound of a turkey gobbling is heard throughout the audio. The turkey's calls are characterized by a rapid, guttural \"gobble-gobble-gobble\" sound, which is a series of short, sharp vocalizations that rise and fall in pitch. The calls are clear and prominent, suggesting the turkey is relatively close to the microphone. There is no music present in this audio.</td>
+                        <td>a chicken that is clucking and then a door shuts.</td>
+                        <td>The audio contains a variety of sounds including the sound of crowing, background noise, generic impact sounds, a tap, and a chicken or rooster crowing.</td>
+                        <td>The audio contains various sounds including things and mechanisms, animal sounds, and respiratory sounds such as breathing.</td>
+                        <td>Chickens are clucking and a rooster is crowing.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/05.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with a female voice speaking, followed by a high-pitched, sustained electronic sound that resembles a sine wave, starting at 0:05 and continuing until the end of the clip at 0:09.</td>
+                        <td>a woman is talking over the intercom.</td>
+                        <td>The audio primarily consists of a woman speaking intermittently, with sounds of mechanisms running throughout. There are also instances of breathing and a ticking sound towards the end of the audio.</td>
+                        <td>The audio consists of a female voice speaking in English with an angry mood, saying 'as for cordelia she went insane with remorse and was shut up in a lunatic asylum.</td>
+                        <td>The sentence is read in a monotone voice with no inflection.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/06.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>A male voice speaks clearly and calmly, with a slight echo, as if in a large, empty room. The voice is steady and consistent throughout the recording.</td>
+                        <td>a man is speaking while others talk in the background.</td>
+                        <td>The audio features a man speaking intermittently, with sounds of his breathing and a ticking noise in between. There's also a brief period of background noise, towards the end of the audio.</td>
+                        <td>The audio contains a woman speaking in English, saying 'I wish he had never been to school,' with an angry mood. The speaker is identified as Mrs. Verloc and her speech starts at the 0-second mark and ends at the 4.679-second mark.</td>
+                        <td>The audio features a man speaking in a raspy voice.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/07.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with the distinct sound of a **drill** operating, characterized by a high-pitched whirring and grinding noise. This drilling sound is present throughout the entire clip, from **0:00 to 0:09**.\n\nIntermittently, a **clanking** sound can be heard, suggesting the impact of metal on metal or a similar percussive action. This clanking occurs at **0:00, 0:01, 0:02, 0:03, 0:04, 0:05, 0:06, 0:07, 0:08, and 0:09**.\n\nAt **0:01**, a brief **thud** is audible, indicating a heavier, dull impact.\n\nFrom **0:02 to 0:09**, a **squeaking** sound is present, possibly from friction or a moving part that needs lubrication.\n\nFinally, at **0:09**, the audio concludes with a **clunk**, a heavier, more definitive impact sound than the earlier clanking.</td>
+                        <td>a motorcycle sputters out of a garage with a clunk of metal.</td>
+                        <td>The audio features the sounds of a motorcycle and a vehicle, which could suggest an urban or suburban setting.</td>
+                        <td>The audio contains sounds of liquid, pump (liquid) and source-ambiguous sounds, generic impact sounds.</td>
+                        <td>The audio features the sound of a chainsaw cutting through wood. It starts off slow and then speeds up as the chainsaw cuts deeper into the wood. The sound of the chainsaw is accompanied by the sound of leaves rustling in the background. It sounds like the chainsaw is cutting through a tree in a forest.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/08.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio features a series of distinct sounds. From 0:00 to 0:05, a high-pitched, sustained tone is heard, reminiscent of a whistle or a very high-frequency hum. This is followed by a brief silence, and then from 0:06 to 0:10, a percussive, rhythmic sound emerges, resembling the distinct clacking of a woodblock. The sound is sharp and resonant, suggesting a hollow wooden instrument being struck.</td>
+                        <td>an xylophone plays a melody in a musical</td>
+                        <td>The audio primarily consists of music produced by vibrating instruments, including an xylophone and other woodwind instruments.</td>
+                        <td>The low quality recording features a marimba melody playing over some wooden impacts and it sounds passionate, happy and fun.</td>
+                        <td>This is a recording of someone playing a xylophone. The xylophone is being played with a lot of enthusiasm and energy. The xylophone player is playing a fast and upbeat melody with a lot of syncopated rhythms. The xylophone has a bright and cheerful sound. This recording could be used as a soundtrack for a children's educational video about music. It could also be used as a ringtone for a mobile phone. It could also be used as a sound effect in a video game. This recording is of high quality. The xylophone is being played with a lot of passion and energy. The xylophone player is playing a fast and upbeat melody with a lot of syncopated rhythms. The xylophone has a bright and cheerful sound. This recording could be used as a soundtrack for a children.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/09.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with a series of distinct, sharp thuds, reminiscent of a heavy object being dropped or struck. These sounds are followed by a brief period of silence before a metallic clang rings out, suggesting the impact of metal on metal. The audio then transitions into a short musical interlude, featuring a single, sustained note played on a wind instrument, possibly a flute or a recorder. This musical segment lasts for approximately 2 seconds, from 0:08 to 0:10. The audio concludes with another series of thuds, similar to those heard at the beginning, reinforcing the percussive nature of the overall soundscape.</td>
+                        <td>a person is splitting logs on a log saw in an outdoor wood shop.</td>
+                        <td>The audio contains sounds of chopping, mechanisms, generic impact sounds, and a brief tone.</td>
+                        <td>The audio contains source-ambiguous sounds, generic impact sounds resembling a hammer, and some wood chopping sounds.</td>
+                        <td>A person is chopping wood with an axe.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/10.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio features a male speaker talking in Chinese, followed by the distinct sound of a gunshot. The speaker's voice is clear and audible throughout the recording. The gunshot, which sounds like a single, sharp crack, occurs at the 0:04 mark and lasts for approximately 0.5 seconds. There is no music present in this audio.</td>
+                        <td>a young man is speaking when he is interrupted by a machine gun shot.</td>
+                        <td>The audio primarily consists of a machine gun firing repetitively, accompanied by other mechanical sounds. There are also brief instances of a man speaking.</td>
+                        <td>The audio contains background noise, multiple occurrences of machine gun fire, and generic impact sounds. There is also a male voice speaking in Mandarin with an angry mood. The speech content is.</td>
+                        <td>A man is speaking and then a gun is fired several times.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/11.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with a male voice speaking, followed by a sudden, high-pitched, sustained electronic sound that resembles a distorted, screeching noise. This sound is present from 0:03 to 0:09.</td>
+                        <td>a person in a video game plays as her voice echoes.</td>
+                        <td>The audio primarily consists of a human voice, specifically a woman speaking at various intervals.</td>
+                        <td>The audio contains a female speaking in English with a sad mood, saying 'Alas! Alas! Sir, have pity on me.</td>
+                        <td>The audio features a woman speaking in a high-pitched voice. She speaks quickly and with a lot of emotion. The audio quality is poor and there is a lot of background noise.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/12.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with the distinct sound of a **water pump** at 0:00, characterized by a rhythmic, mechanical whirring and the gurgling of water being moved. This sound continues throughout the entire clip, providing a constant background presence. At 0:00, a **synthesizer** enters, playing a **melodic, arpeggiated sequence** that sounds like a **harp** or **plucked strings**. The synthesizer melody is light and airy, creating a sense of movement and gentle energy. This musical element continues until the end of the clip at 0:15.</td>
+                        <td>birds and other wildlife chirp in the background with music that starts at the beginning.</td>
+                        <td>The audio consists of a variety of sounds including water, bird vocalizations, video game sounds, music, and background noise.</td>
+                        <td>The audio contains music and sounds of water, resembling a stream, throughout its duration.</td>
+                        <td>Birds chirp in the background while music plays in the foreground.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/13.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with a low, sustained, and slightly distorted synth pad, creating a dark and ominous atmosphere. At 0:02, a high-pitched, metallic clang rings out, followed by a series of rapid, percussive clicks that sound like a clock ticking quickly. A deep, resonant gong then reverberates at 0:04, its sound slowly decaying. \n\nFrom 0:05 to 0:08, a low, rumbling bass synth enters, accompanied by a high-pitched, almost whistling synth melody that ascends in pitch. This is followed by a series of quick, sharp synth stabs that sound like a futuristic laser gun firing. The audio concludes with a final, deep, and sustained synth note that fades out slowly.</td>
+                        <td>an orchestra is playing a film score in the auditorium.</td>
+                        <td>The audio features music throughout, accompanied by the sound of wind, footsteps, video game sounds, and the sound of a whip crack.</td>
+                        <td>The audio contains music playing throughout its duration.</td>
+                        <td>This is a recording of a marching band playing a song. In the background, you can hear the sound of drums and cymbals. The atmosphere is energetic and upbeat.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/14.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The distinct sound of a train is heard, characterized by the rhythmic clatter of its wheels on the tracks. The sound is accompanied by the loud, piercing blast of a train horn, signaling its presence.</td>
+                        <td>a subway is approaching and leaving, while a vehicle is driving by.</td>
+                        <td>The audio primarily consists of the loud, rhythmic, echoing sounds of a subway or metro or underground.</td>
+                        <td>The audio contains sounds of rail transport, train, and clicking, clickety-clack.</td>
+                        <td>The sound of a subway train coming to a stop at a station. Keywords: subway, train, station, stop.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/15.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with the distinct sound of a **train horn** at 0:00, followed by the **rumbling of a train** as it passes by. At 0:02, the **train horn** sounds again, accompanied by the **squealing of train wheels** as the train continues to move. The **train horn** blares once more at 0:04, and the **train rumble** persists. From 0:05 to 0:07, the **train horn** is heard again, along with the **squealing of train wheels** and the **rumbling of the train**. The **train horn** sounds again at 0:08, followed by the **rumbling of the train** and the **squealing of train wheels**. The **train horn** is heard once more at 0:10, accompanied by the **rumbling of the train** and the **squealing of train wheels**. The **train horn** sounds again at 0:12, followed by the **rumbling of the train** and the **squealing of train wheels**. The **train horn** is heard once more at 0:14, accompanied by the **rumbling of the train** and the **squealing of train wheels**. The **train horn** sounds again at 0:16, followed by the **rumbling of the train** and the **squealing of train wheels**. The **train horn** is heard once more at 0:18, accompanied by the **rumbling of the train** and the **squealing of train wheels**. The **train horn** sounds again at 0:20, followed by the **rumbling of the train** and the **squealing of train wheels**. The **train horn** is heard once more at 0:22, accompanied by the **rumbling of the train** and the **squealing of train wheels**. The **train horn** sounds again at 0:24, followed by the **rumbling of the train** and the **squealing of train wheels**. The audio concludes with the **train horn** sounding once more at 0:26, accompanied by the **rumbling of the train** and the **squealing of train wheels**.</td>
+                        <td>a jet aircraft flying over head as men and women speak.</td>
+                        <td>The audio primarily consists of the sound of wind, a vehicle engine, and a helicopter. The wind sound is a constant background noise, while the vehicle engine sound is present at multiple points throughout the audio. The sound of the helicopter, in particular, appears to be a continuous loud, rhythmic, rotor-skating sound, in addition to a loud, rhythmic, continuous rotor sound.</td>
+                        <td>The audio contains the sound of an airplane flying by in the sky.</td>
+                        <td>A crowd of people are talking and cheering as an airplane flies overhead. The engine of the airplane roars as it flies over the crowd.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/16.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio features a solo trumpet playing a slow, melancholic melody. The trumpet's tone is clear and resonant, with a slight vibrato that adds to the emotional depth of the piece. The melody is characterized by long, sustained notes and gentle descents, creating a sense of introspection and longing. The music is present throughout the entire audio clip, from 0:00 to 0:15.</td>
+                        <td>a brass orchestra playing a symphony in a room with soft music in the background.</td>
+                        <td>The audio primarily consists of music produced by vibrating instruments. There are also instances of a soft rhythmic patter sound and a sharp, short, repetitive ticking sound.</td>
+                        <td>The low quality recording features a live performance of a classical song that consists of a brass section melody played over a mellow double bass and soft kick hits. It sounds passionate, emotional and the recording is noisy and in mono.</td>
+                        <td>The low quality recording features a classical song that consists of a string orchestra playing a melody. The recording is noisy, in mono, and it sounds like it was recorded with a phone.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/17.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio features a male voice speaking in German, followed by the distinct sounds of a classical guitar. The guitar plays a melodic sequence, with clear, resonant notes. The music begins at 0:03 and continues until 0:10."</td>
+                        <td>a man is playing a musical instrument while talking about the instrument.</td>
+                        <td>The audio primarily consists of music produced by vibrating instruments and the sound of a single-lens reflex camera, which is heard intermittently.</td>
+                        <td>The low quality recording features a live performance of an acoustic guitar melody and some background noise. It sounds passionate, emotional and the recording is noisy and in mono.</td>
+                        <td>A man speaks and then plays a chord on an acoustic guitar.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/18.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with a short burst of electronic music, featuring a synth playing a melody from 0:00 to 0:01. This is followed by a male voice speaking, with a slight echo, from 0:01 to 0:03. The electronic music returns from 0:03 to 0:05, again with a synth melody. The male voice then speaks again from 0:05 to 0:07, still with an echo. The electronic music plays once more from 0:07 to 0:09, with the synth melody. Finally, the male voice speaks from 0:09 to 0:11, with the echo present.</td>
+                        <td>a man talking, then someone uses an electric shaver.</td>
+                        <td>The audio primarily consists of rhythmic, mechanical, and vibrating sounds of a hair dryer. There are also instances of a man speaking, the sound of an electric shaver, music playing in the background, and some generic impact sounds.</td>
+                        <td>The audio contains an electric shaver being used, followed by a man speaking in English saying 'There's a lot of brands out there, I just want to tell you.' The speaker is male with a neutral mood, and the speech occurs between 4.829 seconds and 9.568 seconds.</td>
+                        <td>This is a recording of a man speaking over music. The man is speaking about a topic that he is passionate about. The music in the background is upbeat and energetic. The audio quality is not great, as it sounds like it was recorded on a smartphone. However, the man's voice is clear and easy to understand. Overall, this is a recording of a man speaking about a topic that he is passionate about, with upbeat and energetic music playing in the background.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/19.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with a distinct, high-pitched squeak, followed by a brief moment of silence. Then, a low, resonant hum emerges, reminiscent of a didgeridoo, which continues throughout the rest of the recording.</td>
+                        <td>a mouse squeaks a call in an enclosed area and people talk in the background.</td>
+                        <td>The audio features background noise throughout, with intermittent human voices, the sound of an animal, generic impact sounds, and a generic sound effect towards the end.</td>
+                        <td>The audio contains sounds of a bird, specifically an owl, and various background noises such as wind or wind noise caught by a microphone at different intervals throughout the recording. Additionally, there is a male voice speaking in English with a disgusted mood.</td>
+                        <td>This is a recording of a man whispering and making whistling sounds. The audio quality is poor and there is a lot of background noise. It sounds like the man is trying to imitate the sound of a horse whinnying.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/20.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with the distinct sound of a single gunshot, followed by a brief pause. Then, a rapid succession of multiple gunshots erupts, creating a chaotic and intense soundscape. The sound of the gunshots is sharp and percussive, suggesting the use of firearms. There is no music present in this audio.</td>
+                        <td>loud machine gun bursts in the distance are followed by more gunshots</td>
+                        <td>The audio contains sounds of a machine gun firing, video game sounds, ticking, generic impact sounds, and surface contact sounds.</td>
+                        <td>The audio contains multiple occurrences of gunfire from a machine gun at various intervals, along with sounds of footsteps and movement throughout the duration of the clip.</td>
+                        <td>A series of gunshots with a man yelling in the background.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/21.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>A male voice is speaking throughout the audio. He has a clear, articulate voice and sounds like he is giving instructions or a demonstration. The audio also contains the sound of a mechanical click at 0:00, followed by a distinct clunk at 0:01. These sounds suggest an action related to the instructions being given, possibly the opening or closing of a compartment.</td>
+                        <td>a man talks with a tool and some wooden dowel, and the tool clicks.</td>
+                        <td>The audio primarily consists of a man speaking intermittently, with the sound of a zipper (clothing) and some background noise.</td>
+                        <td>The audio contains sounds of things and mechanisms throughout its duration.</td>
+                        <td>A man is giving instructions on how to use a machine.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/22.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio features a dog barking, specifically a high-pitched yelp, which is present throughout the entire recording. There is no music in this audio.</td>
+                        <td>a bunch of dogs howl and bark and a person yells.</td>
+                        <td>The audio primarily consists of background noise and a dog whimpering.</td>
+                        <td>The audio contains sounds of dogs barking and whimpering during multiple intervals.</td>
+                        <td>Dogs are barking and whimpering.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/23.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>This is a cheerful, upbeat acoustic folk song, featuring a strummed acoustic guitar playing a rhythmic chord progression. The guitar is present throughout the entire song.</td>
+                        <td>an acoustic guitar with a fast strumming rhythm and a bluesy melody.</td>
+                        <td>The audio primarily consists of music produced by vibrating instruments.</td>
+                        <td>The audio contains someone playing an acoustic guitar fingerstyle with a melody that goes up and down ending on the root note. This is an amateur recording.</td>
+                        <td>Someone is playing a guitar and strumming the chords to a song.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/24.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The distinct sound of someone blowing their nose is heard, characterized by a sharp intake of breath followed by a forceful expulsion of air. The sound is wet and somewhat muffled, suggesting the use of a tissue.</td>
+                        <td>a person is sleeping and snoring.</td>
+                        <td>The audio contains the continuous sound of snoring along with the rhythmic sound of breathing and the sound of mechanisms.</td>
+                        <td>The audio contains sounds of breathing and snoring at multiple intervals.</td>
+                        <td>A person is breathing heavily and snoring.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/25.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio captures the distinct sound of a tire popping, followed by the hissing noise of air escaping. The tire pop is a sharp, percussive sound, while the hiss is a continuous, high-frequency sound. There is no music in the audio.</td>
+                        <td>a child is talking about his friend and his dog</td>
+                        <td>The audio features a woman speaking, wind noise, generic impact sounds, a conversation, and sounds of footsteps.</td>
+                        <td>The audio contains the sound of footsteps outdoors, a woman speaking in English saying 'What was that?' with a surprised mood, and a child singing 'It is tire pop' in English with a happy mood.</td>
+                        <td>A woman speaks, followed by a child speaking, after which a man speaks.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/26.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with the sound of a music box, playing a delicate, almost melancholic melody. The music box continues throughout the entire audio, from 0:00 to 0:16. The melody is carried by what sounds like a glockenspiel or a similar mallet percussion instrument, creating a clear, bell-like tone. There's also a subtle, underlying string instrument, possibly a pizzicato cello or double bass, providing a gentle, rhythmic pulse that complements the main melody. The overall impression is one of quiet contemplation, perhaps even a touch of wistfulness.</td>
+                        <td>the orchestra is playing a symphony, which is a type of classical music.</td>
+                        <td>The audio primarily consists of music produced by vibrating instruments.</td>
+                        <td>The low quality recording features a live performance of an orchestra that consists of mellow strings melody, wide woodwinds melody and soft kick hits layered with claps. It sounds passionate, emotional and addictive.</td>
+                        <td>This is a classical music piece. There is a string section playing a melody. There is a flute playing a counter melody. There is a harp in the background. There is no percussion in this piece. There is a feeling of sadness in this piece. This piece could be used in the soundtrack of a movie. It could be used in a scene where a character is mourning the loss of a loved one.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/27.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with the sound of a **whistle** at 0:00, followed by a **whoosh** at 0:01. From 0:02 to 0:03, there's a distinct **thump**, and then a **whistle** again from 0:03 to 0:04. A **whoosh** is heard at 0:05, and another **thump** at 0:06. The sound of a **whistle** returns from 0:07 to 0:08, followed by a **whoosh** at 0:09. From 0:10 to 0:11, there's a **thump**, and then a **whistle** from 0:11 to 0:12. A **whoosh** is heard at 0:13, and another **thump** at 0:14. The audio concludes with the sound of **fireworks** from 0:15 to 0:17.</td>
+                        <td>a whirring sound is followed by a boom, a car door closing, tires squealing and a bang.</td>
+                        <td>The audio contains sounds of a fire, mechanisms, generic impact sounds, chirping, and a whooshing sound.</td>
+                        <td>The audio contains sounds of ocean waves crashing and wind blowing heavily into a microphone.</td>
+                        <td>This is a recording of fireworks exploding in the night sky. The fireworks are accompanied by the sound of waves crashing against the shore. In the background, you can hear the sound of crickets chirping.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/28.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio features a male speaker, whose voice is clear and distinct. He speaks throughout the recording, with no discernible pauses or breaks in his speech. The sound of a vehicle, possibly a bus, is also present in the audio. This sound is consistent and appears to be a continuous background element. There is no music in the audio.</td>
+                        <td>a man is giving a speech while an alarm is going off.</td>
+                        <td>The audio features a variety of sounds including wind, footsteps, clicking, a human voice, an air horn, and a man speaking.</td>
+                        <td>The audio contains sounds of things and an alarm, followed by a male voice speaking in a foreign language.</td>
+                        <td>This is a recording of a man speaking into a microphone. The audio quality is poor, with a lot of background noise and static. The man is speaking in a foreign language, so I am unable to understand what he is saying. However, I can hear the sound of a car engine revving in the background.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/29.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio features a male speaker demonstrating how to whistle. He begins by saying, \"I'll give you a demonstration how to blow a whistle like this,\" followed by a clear, high-pitched whistle sound. He then asks, \"How do you do that?\" The whistle sound is the primary focus, and there is no music present in the audio.</td>
+                        <td>a person with a whistle speaks, then a man talks.</td>
+                        <td>The audio contains the sound of mechanisms, a man speaking, a human voice, an impact sound, laughter, and whistling.</td>
+                        <td>The audio contains sounds of things and mechanisms throughout, respiratory sounds at multiple intervals, generic impact sounds at various points, and a whistling sound near the end.</td>
+                        <td>A man is giving a demonstration on how to whistle.</td>
+                    </tr>
+
+                    <tr height=100px>
+                        <td><audio controls style="width: 200px;">
+                                <source src="data/wavs/30.wav" type="audio/wav">
+                                Your browser does not support the audio element.
+                            </audio></td>
+                        <td>The audio begins with the distinct, high-pitched sound of a train horn, followed by the rhythmic clatter of a train passing by. The train sounds continue throughout the recording, accompanied by the subtle hum of a vehicle engine. \n\nAt 0:03, a second, louder train horn blast is heard, followed by the sound of a train passing by again. The train sounds continue until 0:07, when the audio ends with a final, drawn-out train horn blast.</td>
+                        <td>a train horn blasts, and trains drive on the railroad tracks.</td>
+                        <td>The audio primarily features the sounds of a train, including the rhythmic, echoing, and repetitive tapping sounds of the train, the high-pitched, loud, metallic screeching of the train wheels, and the high-pitched, loud, echoing, and repetitive ticking sounds.</td>
+                        <td>The audio contains the sound of a train approaching and horns honking.</td>
+                        <td>A train is passing by and honks its horn.</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <style>
+                .col-width {
+                    width: 20%; /* 每列宽度设置为20% */
+                    overflow: hidden; /* 防止内容溢出 */
+                    text-overflow: ellipsis; /* 溢出内容显示省略号 */
+                    white-space: nowrap; /* 不换行 */
+                }
+            </style>
+            <script>
+                function fetchTextFile(url) {
+                    return fetch(url)
+                        .then(response => response.text())
+                        .catch(error => console.error('Error fetching text file:', error));
+                }
+            </script>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
